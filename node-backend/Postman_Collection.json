@@ -1,0 +1,345 @@
+{
+  "info": {
+    "name": "Employee Submissions Management System",
+    "description": "Complete API collection for testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "admin_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "hod_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "dept_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set('admin_token', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login HOD Academy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set('hod_token', pm.response.json().token);",
+                  "pm.collectionVariables.set('dept_id', pm.response.json().user.department_id._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"hod.academy@example.com\",\n  \"password\": \"pass123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Health & Info",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health"]
+            }
+          }
+        },
+        {
+          "name": "Root Endpoint",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Import (Admin)",
+      "item": [
+        {
+          "name": "Import Employees",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "sample-data/employees.csv"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/import/employees",
+              "host": ["{{base_url}}"],
+              "path": ["api", "import", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Import Submissions",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "sample-data/employee_submissions.csv"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/import/submissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "import", "submissions"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. HOD Operations",
+      "item": [
+        {
+          "name": "Get Department Submissions",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{hod_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/departments/{{dept_id}}/submissions?period=2025-Q4",
+              "host": ["{{base_url}}"],
+              "path": ["api", "departments", "{{dept_id}}", "submissions"],
+              "query": [{"key": "period", "value": "2025-Q4"}]
+            }
+          }
+        },
+        {
+          "name": "Submit Aggregate (Auto)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{hod_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"period\": \"2025-Q4\",\n  \"auto_aggregate\": true,\n  \"notes\": \"Auto-computed from approved submissions\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/departments/{{dept_id}}/aggregate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "departments", "{{dept_id}}", "aggregate"]
+            }
+          }
+        },
+        {
+          "name": "Submit Aggregate (Manual)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{hod_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"period\": \"2025-Q4\",\n  \"items\": [\n    {\"product\": \"Academy\", \"percentage\": 50},\n    {\"product\": \"Intensive\", \"percentage\": 30},\n    {\"product\": \"NIAT\", \"percentage\": 20}\n  ],\n  \"notes\": \"Manually adjusted allocations\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/departments/{{dept_id}}/aggregate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "departments", "{{dept_id}}", "aggregate"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Admin Operations",
+      "item": [
+        {
+          "name": "Get Pending Submissions",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/admin/pending?period=2025-Q4",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "pending"],
+              "query": [{"key": "period", "value": "2025-Q4"}]
+            }
+          }
+        },
+        {
+          "name": "Approve Submission",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{admin_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/department_submissions/SUBMISSION_ID",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "department_submissions", "SUBMISSION_ID"]
+            }
+          }
+        },
+        {
+          "name": "Reject Submission",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{admin_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"rejected\",\n  \"rejection_reason\": \"Numbers don't add up to 100\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/department_submissions/SUBMISSION_ID",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "department_submissions", "SUBMISSION_ID"]
+            }
+          }
+        },
+        {
+          "name": "Preview Master Report",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/admin/reports/master/2025-Q4",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "reports", "master", "2025-Q4"]
+            }
+          }
+        },
+        {
+          "name": "Publish Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{admin_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"period\": \"2025-Q4\",\n  \"overwrite\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/publish",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "publish"]
+            }
+          }
+        },
+        {
+          "name": "List Report Files",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/admin/reports/files",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "reports", "files"]
+            }
+          }
+        },
+        {
+          "name": "Get Report File",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/admin/reports/file/FILE_NAME",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "reports", "file", "FILE_NAME"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+

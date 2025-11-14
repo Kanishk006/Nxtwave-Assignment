@@ -1,0 +1,12 @@
+emp_id,first_name,last_name,email,department,role,location,status
+EMP100,John,Doe,john.doe@example.com,Academy,Senior Developer,Bangalore,active
+EMP101,Jane,Smith,jane.smith@example.com,Intensive,Project Manager,Mumbai,active
+EMP102,Bob,Johnson,bob.johnson@example.com,NIAT,Senior Consultant,Delhi,active
+EMP103,Alice,Williams,alice.w@example.com,Academy,Designer,Pune,active
+EMP104,Charlie,Brown,charlie.b@example.com,Intensive,Developer,Hyderabad,active
+EMP105,Diana,Prince,diana.p@example.com,NIAT,Analyst,Chennai,active
+EMP106,Ethan,Hunt,ethan.h@example.com,Academy,Tech Lead,Bangalore,active
+EMP107,Fiona,Gallagher,fiona.g@example.com,Intensive,QA Lead,Mumbai,active
+EMP108,George,Martin,george.m@example.com,NIAT,Business Analyst,Delhi,active
+EMP109,Hannah,Montana,hannah.m@example.com,Academy,Junior Developer,Pune,active
+

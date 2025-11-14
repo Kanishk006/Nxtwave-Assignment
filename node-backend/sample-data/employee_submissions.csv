@@ -1,0 +1,18 @@
+emp_id,period,product,percentage,notes,source
+EMP100,2025-Q4,Academy,70,Primary project work,csv_import
+EMP100,2025-Q4,NIAT,30,Secondary support,csv_import
+EMP101,2025-Q4,Intensive,85,Main project management,csv_import
+EMP101,2025-Q4,Academy,15,Cross-team coordination,csv_import
+EMP102,2025-Q4,NIAT,90,Lead consultant role,csv_import
+EMP102,2025-Q4,Academy,10,Training sessions,csv_import
+EMP103,2025-Q4,Academy,100,Full-time design work,csv_import
+EMP104,2025-Q4,Intensive,95,Development tasks,csv_import
+EMP104,2025-Q4,NIAT,5,Documentation,csv_import
+EMP105,2025-Q4,NIAT,80,Analysis and reporting,csv_import
+EMP105,2025-Q4,Intensive,20,Client meetings,csv_import
+EMP106,2025-Q4,Academy,90,Technical leadership,csv_import
+EMP106,2025-Q4,Intensive,10,Architecture review,csv_import
+EMP107,2025-Q4,Intensive,100,QA and testing,csv_import
+EMP108,2025-Q4,NIAT,100,Business analysis,csv_import
+EMP109,2025-Q4,Academy,100,Development work,csv_import
+

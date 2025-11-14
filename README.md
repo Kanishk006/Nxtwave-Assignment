@@ -1,46 +1,132 @@
-# Getting Started with Create React App
+# Full Stack Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack application with React + TypeScript frontend and Node.js + TypeScript backend.
 
-## Available Scripts
+## 📁 Project Structure
 
-In the project directory, you can run:
+```
+nxtwaveproject/
+├── react-frontend/          # React + TypeScript + Tailwind CSS
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── node-backend/            # Node.js + Express + TypeScript
+│   ├── src/
+│   ├── dist/
+│   └── package.json
+└── README.md
+```
 
-### `npm start`
+## 🚀 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend
+- ⚛️ **React** - UI library
+- 📘 **TypeScript** - Type safety
+- 🎨 **Tailwind CSS** - Utility-first CSS framework
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Backend
+- 🟢 **Node.js** - JavaScript runtime
+- 📘 **TypeScript** - Type safety
+- ⚡ **Express.js** - Web framework
+- 🍃 **MongoDB** - NoSQL database with Mongoose
+- 🔒 **CORS** - Cross-origin resource sharing
 
-### `npm test`
+## 🛠️ Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-### `npm run build`
+### Frontend Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Navigate to the frontend directory:
+```bash
+cd react-frontend
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies:
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Start the development server:
+```bash
+npm start
+```
 
-### `npm run eject`
+The frontend will run on `http://localhost:3000`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Backend Setup
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Navigate to the backend directory:
+```bash
+cd node-backend
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. Start the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+The backend will run on `http://localhost:5000`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📋 Available Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Frontend (react-frontend)
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run tests
+
+### Backend (node-backend)
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Compile TypeScript to JavaScript
+- `npm start` - Run production build
+
+## 🔗 API Endpoints
+
+### Base URL: `http://localhost:5000`
+
+- `GET /` - API information
+- `GET /api/health` - Health check
+
+### User CRUD Operations (MongoDB)
+- `GET /api/users` - Get all users from database
+- `GET /api/users/:id` - Get single user by ID
+- `POST /api/users` - Create a new user in database
+- `PUT /api/users/:id` - Update user by ID
+- `DELETE /api/users/:id` - Delete user by ID
+
+## 🎯 Project Status
+
+1. ✅ React frontend with TypeScript and Tailwind CSS
+2. ✅ Node.js backend with TypeScript and Express
+3. ✅ MongoDB database connected with Mongoose (Atlas)
+4. ✅ Complete Employee Submissions Management System
+5. ✅ JWT Authentication with role-based access control
+6. ✅ CSV import for employees and submissions
+7. ✅ HOD workflow (review & aggregate submissions)
+8. ✅ Admin workflow (approve & publish to Google Sheets)
+9. ✅ Complete audit logging system
+10. ✅ 13 API endpoints fully implemented
+11. Connect frontend to backend API
+12. Deploy to production
+
+## 📝 Notes
+
+- Make sure both frontend and backend servers are running for full functionality
+- The backend runs on port 5000, frontend on port 3000
+- CORS is configured to allow cross-origin requests
+
+## 🤝 Contributing
+
+Feel free to contribute to this project!
+
+## 📄 License
+
+ISC
+
