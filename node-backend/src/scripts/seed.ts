@@ -157,40 +157,107 @@ async function seed() {
 
     const createdEmployees = await Employee.insertMany(employees);
 
-    // Create Sample Employee Submissions for 2025-Q4
+    // Create Sample Employee Submissions for 2025-Q1, Q2, Q3, Q4 with varying percentages
     console.log('📊 Creating employee submissions...');
-    const submissions = [
-      // Tech Department Employees
-      { emp_id: 'EMP001', product: 'Academy', percentage: 60 },
-      { emp_id: 'EMP001', product: 'NIAT', percentage: 40 },
-      { emp_id: 'EMP002', product: 'Academy', percentage: 80 },
-      { emp_id: 'EMP002', product: 'Intensive', percentage: 20 },
-      { emp_id: 'EMP003', product: 'Academy', percentage: 100 },
-      // Sales Department Employees
-      { emp_id: 'EMP004', product: 'Intensive', percentage: 70 },
-      { emp_id: 'EMP004', product: 'Academy', percentage: 30 },
-      { emp_id: 'EMP005', product: 'Intensive', percentage: 100 },
-      // Design Department Employees
-      { emp_id: 'EMP006', product: 'NIAT', percentage: 90 },
-      { emp_id: 'EMP006', product: 'Academy', percentage: 10 },
-      { emp_id: 'EMP007', product: 'NIAT', percentage: 100 },
-    ];
+    const submissionsByQuarter: { [key: string]: Array<{ emp_id: string; product: string; percentage: number }> } = {
+      '2025-Q1': [
+        // Tech Department Employees
+        { emp_id: 'EMP001', product: 'Academy', percentage: 55 },
+        { emp_id: 'EMP001', product: 'NIAT', percentage: 45 },
+        { emp_id: 'EMP002', product: 'Academy', percentage: 75 },
+        { emp_id: 'EMP002', product: 'Intensive', percentage: 25 },
+        { emp_id: 'EMP003', product: 'Academy', percentage: 65 },
+        { emp_id: 'EMP003', product: 'NIAT', percentage: 35 },
+        // Sales Department Employees
+        { emp_id: 'EMP004', product: 'Intensive', percentage: 65 },
+        { emp_id: 'EMP004', product: 'Academy', percentage: 35 },
+        { emp_id: 'EMP005', product: 'Intensive', percentage: 75 },
+        { emp_id: 'EMP005', product: 'NIAT', percentage: 25 },
+        // Design Department Employees
+        { emp_id: 'EMP006', product: 'NIAT', percentage: 85 },
+        { emp_id: 'EMP006', product: 'Academy', percentage: 15 },
+        { emp_id: 'EMP007', product: 'NIAT', percentage: 55 },
+        { emp_id: 'EMP007', product: 'Intensive', percentage: 45 },
+      ],
+      '2025-Q2': [
+        // Tech Department Employees
+        { emp_id: 'EMP001', product: 'Academy', percentage: 60 },
+        { emp_id: 'EMP001', product: 'NIAT', percentage: 40 },
+        { emp_id: 'EMP002', product: 'Academy', percentage: 80 },
+        { emp_id: 'EMP002', product: 'Intensive', percentage: 20 },
+        { emp_id: 'EMP003', product: 'Academy', percentage: 70 },
+        { emp_id: 'EMP003', product: 'NIAT', percentage: 30 },
+        // Sales Department Employees
+        { emp_id: 'EMP004', product: 'Intensive', percentage: 70 },
+        { emp_id: 'EMP004', product: 'Academy', percentage: 30 },
+        { emp_id: 'EMP005', product: 'Intensive', percentage: 80 },
+        { emp_id: 'EMP005', product: 'NIAT', percentage: 20 },
+        // Design Department Employees
+        { emp_id: 'EMP006', product: 'NIAT', percentage: 90 },
+        { emp_id: 'EMP006', product: 'Academy', percentage: 10 },
+        { emp_id: 'EMP007', product: 'NIAT', percentage: 60 },
+        { emp_id: 'EMP007', product: 'Intensive', percentage: 40 },
+      ],
+      '2025-Q3': [
+        // Tech Department Employees
+        { emp_id: 'EMP001', product: 'Academy', percentage: 50 },
+        { emp_id: 'EMP001', product: 'NIAT', percentage: 50 },
+        { emp_id: 'EMP002', product: 'Academy', percentage: 70 },
+        { emp_id: 'EMP002', product: 'Intensive', percentage: 30 },
+        { emp_id: 'EMP003', product: 'Academy', percentage: 75 },
+        { emp_id: 'EMP003', product: 'NIAT', percentage: 25 },
+        // Sales Department Employees
+        { emp_id: 'EMP004', product: 'Intensive', percentage: 60 },
+        { emp_id: 'EMP004', product: 'Academy', percentage: 40 },
+        { emp_id: 'EMP005', product: 'Intensive', percentage: 85 },
+        { emp_id: 'EMP005', product: 'NIAT', percentage: 15 },
+        // Design Department Employees
+        { emp_id: 'EMP006', product: 'NIAT', percentage: 80 },
+        { emp_id: 'EMP006', product: 'Academy', percentage: 20 },
+        { emp_id: 'EMP007', product: 'NIAT', percentage: 65 },
+        { emp_id: 'EMP007', product: 'Intensive', percentage: 35 },
+      ],
+      '2025-Q4': [
+        // Tech Department Employees
+        { emp_id: 'EMP001', product: 'Academy', percentage: 65 },
+        { emp_id: 'EMP001', product: 'NIAT', percentage: 35 },
+        { emp_id: 'EMP002', product: 'Academy', percentage: 85 },
+        { emp_id: 'EMP002', product: 'Intensive', percentage: 15 },
+        { emp_id: 'EMP003', product: 'Academy', percentage: 60 },
+        { emp_id: 'EMP003', product: 'NIAT', percentage: 40 },
+        // Sales Department Employees
+        { emp_id: 'EMP004', product: 'Intensive', percentage: 75 },
+        { emp_id: 'EMP004', product: 'Academy', percentage: 25 },
+        { emp_id: 'EMP005', product: 'Intensive', percentage: 70 },
+        { emp_id: 'EMP005', product: 'NIAT', percentage: 30 },
+        // Design Department Employees
+        { emp_id: 'EMP006', product: 'NIAT', percentage: 95 },
+        { emp_id: 'EMP006', product: 'Academy', percentage: 5 },
+        { emp_id: 'EMP007', product: 'NIAT', percentage: 70 },
+        { emp_id: 'EMP007', product: 'Intensive', percentage: 30 },
+      ],
+    };
 
+    const quarters = ['2025-Q1', '2025-Q2', '2025-Q3', '2025-Q4'];
     let submissionCounter = 1;
-    for (const sub of submissions) {
-      const employee = createdEmployees.find((e) => e.emp_id === sub.emp_id);
-      if (employee) {
-        await EmployeeSubmission.create({
-          submission_ref: `SUB${submissionCounter.toString().padStart(3, '0')}`,
-          employee_id: employee._id,
-          period: '2025-Q4',
-          product: sub.product,
-          percentage: sub.percentage,
-          notes: `Sample submission for ${employee.first_name}`,
-          source: 'seed_script',
-          approved: false,
-        });
-        submissionCounter++;
+
+    for (const quarter of quarters) {
+      const submissions = submissionsByQuarter[quarter];
+      for (const sub of submissions) {
+        const employee = createdEmployees.find((e) => e.emp_id === sub.emp_id);
+        if (employee) {
+          await EmployeeSubmission.create({
+            submission_ref: `SUB${submissionCounter.toString().padStart(3, '0')}`,
+            employee_id: employee._id,
+            period: quarter,
+            product: sub.product,
+            percentage: sub.percentage,
+            notes: `Sample submission for ${employee.first_name} - ${quarter}`,
+            source: 'seed_script',
+            approved: false,
+          });
+          submissionCounter++;
+        }
       }
     }
 
@@ -199,7 +266,7 @@ async function seed() {
     console.log(`  - Departments: 3 (Tech, Sales, Design)`);
     console.log(`  - Users: 4 (1 admin, 3 HODs)`);
     console.log(`  - Employees: ${createdEmployees.length}`);
-    console.log(`  - Employee Submissions: ${submissions.length}`);
+    console.log(`  - Employee Submissions: ${submissionCounter - 1} (across Q1, Q2, Q3, Q4)`);
     console.log('\n🔐 Login Credentials:');
     console.log(`  Admin: admin@example.com / admin123`);
     console.log(`  HOD Tech: hod.tech@example.com / pass123`);

@@ -34,7 +34,7 @@ const Login: React.FC = () => {
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Employee Submissions
+            Management System
           </h1>
           <p className="text-gray-600">Sign in to your account</p>
         </div>
