@@ -10,7 +10,7 @@ import {
   ReportFilesResponse
 } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://nxtwave-assignment-e5qv.vercel.app/api';
 
 class ApiService {
   private api: AxiosInstance;
